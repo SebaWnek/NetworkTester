@@ -1,0 +1,148 @@
+﻿<Window x:Class="Tester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tester"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="680" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tabs" Grid.Row="0">
+            <TabItem Header="Main">
+                <StackPanel>
+                    <Label Content="Username:"/>
+                    <TextBox x:Name="usernameBox" Margin="5" />
+                    <Label Content="Location:"/>
+                    <TextBox x:Name="locationBox" Margin="5"/>
+                    <ComboBox x:Name="locationComboBox" SelectedIndex="0" Margin="5">
+                        <ComboBoxItem Content="South"/>
+                        <ComboBoxItem Content="North"/>
+                    </ComboBox>
+                    <Label Content="PC name:"/>
+                    <TextBox x:Name="pcNameBox" Margin="5" IsEnabled="False"/>
+                    <Separator Margin="10"/>
+                    <Label Content="Speed Test results:"/>
+                    <Label Content="Ping:"/>
+                    <TextBox x:Name="internetPingBox" Margin="5"/>
+                    <Label Content="Download:"/>
+                    <TextBox x:Name="internetDownloadBox" Margin="5"/>
+                    <Label Content="Upload:"/>
+                    <TextBox x:Name="internetUploadBox" Margin="5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="moreOptions" Margin="5" IsChecked="True"/>
+                        <Label Content="Open more tools after tests"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Ping">
+                <DataGrid x:Name="pingGrid" AutoGenerateColumns="True">
+
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Transfer">
+                <StackPanel>
+                    <Label Content="Test file (local network):"/>
+                    <TextBox x:Name="transferPathBox" Margin="5" Text="test.txt" IsEnabled="False"/>
+                    <Label Content="File size (MB):"/>
+                    <TextBox x:Name="sizeBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="Time (ms):"/>
+                    <TextBox x:Name="timeBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="Speed (Mbps):"/>
+                    <TextBox x:Name="speedBox" Margin="5" IsEnabled="False"/>
+                    <Separator Margin="5"/>
+                    <Label Content="Test file (internet) / Timeout time (s):"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="intTransferPathBox" Margin="5,5,5,5" Text="https://download.microsoft.com/download/3/1/C/31CE45A2-A46F-48CD-B58E-AF33754AD41D/IE8-WindowsXP-KB2898785-x86-PLK.exe" IsEnabled="False" Width="300"/>
+                        <TextBox x:Name="timeoutBox" Margin="5" Text="120" Width="55" HorizontalContentAlignment="Center" IsEnabled="False"/>
+                    </StackPanel>
+                    <Label Content="File size (MB):"/>
+                    <TextBox x:Name="intSizeBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="Time (ms):"/>
+                    <TextBox x:Name="intTimeBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="Speed (Mbps):"/>
+                    <TextBox x:Name="intSpeedBox" Margin="5" IsEnabled="False"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="PST">
+                <StackPanel>
+                    <Label Content="PST base location:"/>
+                    <TextBox x:Name="pstBaseLocationBox" Text="\\servername\" Margin="5" IsEnabled="False"/>
+                    <Label Content="PST location:"/>
+                    <TextBox x:Name="pstLocationBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="PST file count:"/>
+                    <TextBox x:Name="pstCountBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="PST total size (MB):"/>
+                    <TextBox x:Name="pstTotalSizeBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="PST largest size (MB):"/>
+                    <TextBox x:Name="pstLargestBox" Margin="5" IsEnabled="False"/>
+                    <Label Content="PST size limit (MB):"/>
+                    <TextBox x:Name="pstSizeLimitBox" Text="1024" Margin="5" IsEnabled="False"/>
+                    <Label Content="PSTs over limit:"/>
+                    <TextBox x:Name="pstOverLimitBox" Margin="5" IsEnabled="False"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="More tools">
+                <StackPanel>
+                    <Button x:Name="ieButton" Content="Internet options" Margin="5" Click="IeButton_Click"/>
+                    <Button x:Name="chromeButton" Content="Open Chrome" Margin="5" Click="ChromeButton_Click"/>
+                    <Button x:Name="javaButton" Content="Java options" Margin="5" Click="JavaButton_Click"/>
+                    <Button x:Name="taskmgrButton" Content="Task manager" Margin="5" Click="TaskmgrButton_Click"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Domain:"/>
+                        <TextBox x:Name="cmdDomainBox" Margin="5" Width="322" Text="localhost" IsEnabled="False"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Username:"/>
+                        <TextBox x:Name="cmdUserBox" Margin="5" Width="310"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Password :" Width="66"/>
+                        <PasswordBox x:Name="cmdPassBox" Margin="5" Width="310"/>
+                    </StackPanel>
+                    <Button x:Name="cmdButton" Content="Command prompt - run as different user" Margin="5" Click="CmdButton_Click"/>
+                    <Button x:Name="tempButton" Content="Temp folder" Margin="5" Click="TempButton_Click"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Raw data">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="rawDataBox" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,10" Height="365" Grid.ColumnSpan="6"/>
+                    <Button x:Name="copyButton" Content="Copy" Grid.Row="1" Margin="0,5,5,5" Grid.Column="1" Click="CopyButton_Click" Grid.ColumnSpan="5"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="        ">
+                <StackPanel>
+                    <Label Content="password:" HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                    <TextBox x:Name="passwordBox" Margin="10,5,5,5" Width="100" HorizontalAlignment="Left"/>
+                    <Button x:Name="passwordButton" Content="Enable" Click="PasswordButton_Click" Width="50" HorizontalAlignment="Left" Margin="10,5,0,0"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Current state:"/>
+                <TextBox x:Name="stateBox" Text="Awaiting input..." Margin="5" IsEnabled="False" Width="300"/>
+            </StackPanel>
+            <ProgressBar x:Name="progressBar" Minimum="0" Maximum="100" Value="0" Margin="5" Height="20" x:FieldModifier="public"/>
+            <ProgressBar x:Name="dlProgressBar" Minimum="0" Maximum="100" Value="0" Margin="5" Height="20" x:FieldModifier="public"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="saveButton" Content="Save settings" Grid.Column="0" Margin="5" Click="SaveButton_Click"/>
+            <Button x:Name="startButton" Content="Start test" Grid.Column="1" Margin="5" Click="StartButton_Click"/>
+            <Button x:Name="generateButton" Content="Generate report" Grid.Column="2" Margin="5" Click="GenerateButton_Click" IsEnabled="False"/>
+        </Grid>
+    </Grid>
+</Window>
